@@ -18,7 +18,7 @@
   "scripts": {
     "grunt": "grunt",
     "preserve:debug": "npm run grunt copy:externalresources",  
-    "serve:debug": "http-server -p 9090 ./",
+    "serve:debug": "http-server -p 9090 ./src",
     "bundle": "npm run grunt"
   }
 }
