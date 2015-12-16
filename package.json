@@ -5,19 +5,24 @@
   "main": "index.js",
   "author": "Fabien Thebaud",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fthebaud/secret-santa-01.git"
+  },
   "dependencies": {
     "bootstrap": "3.3.6",
     "jquery": "2.1.4"
   },
   "devDependencies": {
     "grunt": "0.4.5",
+    "grunt-contrib-clean": "^0.7.0",
     "grunt-contrib-copy": "0.8.2",
     "grunt-contrib-cssmin": "0.14.0",
     "grunt-contrib-uglify": "0.11.0"
   },
   "scripts": {
     "grunt": "grunt",
-    "preserve:debug": "npm run grunt copy:externalresources",  
+    "preserve:debug": "npm run grunt copy:externalresources",
     "serve:debug": "http-server -p 9090 ./src",
     "bundle": "npm run grunt"
   }
