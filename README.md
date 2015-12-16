@@ -1,12 +1,20 @@
-Project secret-santa
+# Project secret-santa
 
-Please install globally the following node modules: 
-http-server: npm install http-server -g
-grunt command line interpreter: npm install -g grunt-cli
-
-Install the project:
-In the root directory, run "npm install"
-
-Start the server in debug mode : npm run serve:debug
-=> application is live at http://localhost:9090/index.html
-
+Please install globally the following node modules
+- http-server: 
+```sh
+npm install -g http-server
+```
+- grunt command line interpreter: 
+```sh
+npm install -g grunt-cli
+```
+Then install the secret-santa project (you have the be in the project's root directory) :
+```sh
+npm install
+```
+Start the server in debug mode : 
+```sh
+npm run serve:debug
+```
+=> Application is live at http://localhost:9090/index.html
