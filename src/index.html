@@ -12,9 +12,12 @@
     
     <link rel="icon" type="image/png" href="resources/images/favicon.png" />
   </head>
-  <body>
-    <h1>Hello, world!</h1>
-    <button onclick="secretsanta.alert('Ho!')" class='btn btn-info'>Hey!</button>
+  <body  onload="secretsanta.init()">
+    <div>Please enter the name  of the participants or the names of a couple seperated by "and". (i.e. "Franny and Zooey")<div>
+    
+    <input type="text" name="participant">
+    <button onclick="secretsanta.addParticipant()" class='btn btn-info'>Add</button>
+    
     <div class="container"></div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
