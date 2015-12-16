@@ -13,13 +13,20 @@
     <link rel="icon" type="image/png" href="resources/images/favicon.png" />
   </head>
   <body  onload="secretsanta.init()">
-    <div>Please enter the name  of the participants or the names of a couple seperated by "and". (i.e. "Franny and Zooey")<div>
+  
+    <div class="container">
+        <div class="jumbotron">
+            <h1> Secret Santa</h1>
+            <p> Please enter the name of the participant or the names of a couple seperated by "and". (i.e. "Franny and Zooey")</p>
+        </div>
+        <div>
+            <input type="text" name="participant" class="form-control"/>
+            <button onclick="secretsanta.addParticipant()" class='btn btn-info'>Add</button>
+        </div>
+        
+        <div class="participants"></div>
+    </div>
     
-    <input type="text" name="participant">
-    <button onclick="secretsanta.addParticipant()" class='btn btn-info'>Add</button>
-    
-    <div class="container"></div>
-
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="external-resources/scripts/jquery.min.js"></script>
     <!-- Include all compiled plugins, or include individual files as needed -->

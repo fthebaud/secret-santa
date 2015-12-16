@@ -12,7 +12,7 @@ var secretsanta = {
     addParticipant : function(text){
         var participant = $('input[name=participant]').val();
         if (participant){
-            $( ".container" ).append( "<div class='alert alert-success fade in'> <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" + participant + "</div>");    
+            $( ".participants" ).append( "<div class='alert alert-success fade in'> <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" + participant + "</div>");    
         }
     }
 }
