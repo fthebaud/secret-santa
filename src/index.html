@@ -17,11 +17,15 @@
     <div class="container">
         <div class="jumbotron">
             <h1> Secret Santa</h1>
-            <p> Please enter the name of the participant or the names of a couple seperated by "and". (i.e. "Franny and Zooey")</p>
+            <p>Please enter the name of the participants.</p>
+            <p>Participants can be added as couples (so that people won't have their significant other as secret santa). To do so, enter the two names separated by "and".</p>
         </div>
-        <div>
-            <input type="text" name="participant" class="form-control"/>
-            <button onclick="secretsanta.addParticipant()" class='btn btn-info'>Add</button>
+            
+        <div class="input-group">
+            <input type="text" name="participant" class="form-control" placeholder="Enter the name of a participant"/>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-info" onclick="secretsanta.addParticipant()">Add</button>
+            </span>
         </div>
         
         <div class="participants"></div>
