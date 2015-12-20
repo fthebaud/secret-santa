@@ -20,12 +20,18 @@
             <p>Please enter the name of the participants.</p>
             <p>Participants can be added as couples (so that people won't have their significant other as secret santa). To do so, enter the two names separated by "and".</p>
         </div>
-            
-        <div class="input-group">
-            <input type="text" name="participant" class="form-control" placeholder="Enter the name of a participant"/>
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-info" onclick="secretsanta.addParticipant()">Add</button>
-            </span>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="text" name="participant" class="form-control" placeholder="Enter the name of a participant"/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-info" onclick="secretsanta.addParticipant()">Add</button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <button type="button" class="btn btn-block btn-warning">Draw at random!</button>    
+            </div>
         </div>
     </div>
     
@@ -42,18 +48,6 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th>1</th>
-                    <td>Mark 1</td>
-                    <td>(En couple avec Mark 2)</td>
-                    <td><button type="button">DELETE</button></td>
-                </tr>
-                <tr>
-                    <th>2</th>
-                    <td>Mark 2</td>
-                    <td>(En couple avec Mark 1)</td>
-                    <td><button type="button">DELETE</button></td>
-                </tr>
             </tbody>
         </table>
     </div>
