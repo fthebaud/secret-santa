@@ -9,7 +9,7 @@
   <title>Secret Santa</title>
 
   <!-- Bootstrap -->
-  <link href="external-resources/css/bootstrap.min.css" rel="stylesheet">
+  <link href="external-resources/css/bootstrap.css" rel="stylesheet">
 
   <link rel="icon" type="image/png" href="resources/images/favicon.png" />
 </head>
@@ -25,9 +25,9 @@
     <div class="row">
       <div class="col-md-6">
         <div class="input-group">
-          <input type="text" name="participant" class="form-control" placeholder="Enter the name of a participant" />
+          <input type="text" name="newParticipant" class="form-control" placeholder="Enter the name of a participant" onkeypress="secretsanta.addParticipantKeypress(event)"/>
           <span class="input-group-btn">
-            <button type="button" id="buttonAdd" class="btn btn-info">Add</button>
+            <button type="button" class="btn btn-info" onclick="secretsanta.addParticipant()">Add</button>
           </span>
         </div>
       </div>
@@ -55,15 +55,11 @@
   </div>
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="external-resources/scripts/jquery.min.js"></script>
-  <!-- Include all compiled plugins, or include individual files as needed -->
-  <script src="external-resources/scripts/bootstrap.min.js"></script>
+  <script src="external-resources/scripts/jquery.js"></script>
+  <script src="external-resources/scripts/bootstrap.js"></script>
+
   <script src="resources/scripts/app.js"></script>
-  <script>
-    $(document).ready(function() {
-      secretsanta.init();
-    });
-  </script>
+
 </body>
 
 </html>

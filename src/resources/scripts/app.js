@@ -5,36 +5,37 @@ var secretsanta = secretsanta || {};
   /*global $:false */
   "use strict";
 
-  //private variable
+  //private stuff (hidden in the closure)
   var nbParticipants = 0;
 
-  //private functions
-  var addParticipant = function() {
-    var participant = $('input[name=participant]').val();
-    $('input[name=participant]').val('');
-    if (participant) {
-      nbParticipants++;
-      $("#participants").prepend("<tr><th>" + nbParticipants + "</th><td>" + participant +
-        "</td><td></td><td><button type='button' class='deleteButton'>DELETE</button></td></tr>");
+  var renumberRows = function() {
+    $('.participant').each(function (i) {
+      $(this).children('.participantId').text(nbParticipants - i);
+    });
+  };
+
+  //public static functions
+  secretsanta.addParticipantKeypress = function(event) {
+    if (event.which == 13) {
+      secretsanta.addParticipant();
     }
   };
 
-  //public function binding html elements to javascript functions
-  secretsanta.init = function() {
-    $('input[name=participant]').on("keypress", function(event) {
-      if (event.which == 13) {
-        addParticipant();
-      }
-    });
+  secretsanta.addParticipant = function() {
+    var newParticipant = $('input[name=newParticipant]').val();
+    $('input[name=newParticipant]').val('');
+    if (newParticipant) {
+      nbParticipants++;
+      $("#participants").prepend("<tr class='participant'><td class='participantId'>" + nbParticipants + "</td><td>" + newParticipant +
+        "</td><td></td><td><button type='button' onclick='secretsanta.deleteParticipant($(this))'>DELETE</button></td></tr>");
+    }
+  };
 
-    $('#buttonAdd').on("click", function() {
-      addParticipant();
-    });
-
-    $('.deleteButton').on("click", function() {
-      console.log("delete");
-      //$(this).parent().parent().remove();
-      //$target.hide('slow', function(){ $target.remove(); });
+  secretsanta.deleteParticipant = function(deleteButtonJq) {
+    nbParticipants--;
+    deleteButtonJq.parent().parent().hide('slow', function() {
+      $(this).remove();
+      renumberRows();
     });
   };
 
