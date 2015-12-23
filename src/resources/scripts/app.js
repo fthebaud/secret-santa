@@ -1,33 +1,41 @@
-(function(){
+//namespace : window.secretsanta
+var secretsanta = secretsanta || {};
+
+(function() {
   /*global $:false */
   "use strict";
 
-  var secretsanta = {
+  //private variable
+  var nbParticipants = 0;
 
-      //TODO make private, use modules... (ES6)
-      nbParticipants : 0,
+  //private functions
+  var addParticipant = function() {
+    var participant = $('input[name=participant]').val();
+    $('input[name=participant]').val('');
+    if (participant) {
+      nbParticipants++;
+      $("#participants").prepend("<tr><th>" + nbParticipants + "</th><td>" + participant +
+        "</td><td></td><td><button type='button' class='deleteButton'>DELETE</button></td></tr>");
+    }
+  };
 
-      init : function() {
-          $('input[name=participant]').bind("keypress", function(event) {
-              if(event.which == 13) {
-                  event.preventDefault();
-                  secretsanta.addParticipant();
-              }
-          });
-      },
-
-      addParticipant : function(text){
-          var participant = $('input[name=participant]').val();
-          $('input[name=participant]').val('');
-          if (participant){
-              secretsanta.nbParticipants++;
-              $( "#participants" ).prepend( "<tr><th>" + secretsanta.nbParticipants + "</th><td>" + participant + "</td><td></td><td><button type='button' onclick='secretsanta.deleteLine(" + secretsanta.nbParticipants + ")'>DELETE</button></td></tr>" );
-          }
-      },
-
-      deleteLine : function(lineNumber){
-          alert("delete line " + lineNumber);
+  //public function binding html elements to javascript functions
+  secretsanta.init = function() {
+    $('input[name=participant]').on("keypress", function(event) {
+      if (event.which == 13) {
+        addParticipant();
       }
+    });
+
+    $('#buttonAdd').on("click", function() {
+      addParticipant();
+    });
+
+    $('.deleteButton').on("click", function() {
+      console.log("delete");
+      //$(this).parent().parent().remove();
+      //$target.hide('slow', function(){ $target.remove(); });
+    });
   };
 
 }());
