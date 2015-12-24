@@ -22,16 +22,27 @@ var secretsanta = secretsanta || {};
   };
 
   var addOneParticipant = function(name, partner) {
+    name = capitalizeFirstLetter(name);
+    if (partner) {
+      partner = capitalizeFirstLetter(partner);
+    }
     if(!participants.hasOwnProperty(name)){
       participants[name] = partner;
-      partner = partner ? "(in a couple with " + partner + ")" : "";
+      var partnerLabel = partner ? "(in a couple with " + partner + ")" : "";
       $("#participants").prepend("<tr class='participant'><td class='rowNumber'>" + Object.keys(participants).length + "</td>" +
-        "<td class='participantName'>" + capitalizeFirstLetter(name) + "</td>" +
-        "<td>" + partner + "</td>" +
+        "<td class='participantName'>" + name + "</td>" +
+        "<td class='partner'>" + partnerLabel + "</td>" +
         "<td><button type='button' onclick='secretsanta.deleteParticipant($(this))'>DELETE</button></td></tr>");
     }else{
       //TODO mettre une belle popup
       alert('nop, le participant ' + name + ' existe deja');
+    }
+  };
+
+  var makeSingle =function(participantName){
+    if (participantName) {
+      $("#participants tr td.participantName:contains(" + participantName + ")" ).siblings('.partner').html('');
+      participants[participantName] = '';
     }
   };
 
@@ -71,10 +82,11 @@ var secretsanta = secretsanta || {};
 
   secretsanta.deleteParticipant = function(deleteButtonJq) {
     var row = deleteButtonJq.parent().parent();
-    var praticipantName = row.children(".participantName").html();
-    delete participants.participantName;
+    var participantName = row.children(".participantName").html();
     row.hide('slow', function() {
       $(this).remove();
+      makeSingle(participants[participantName]);
+      delete participants[participantName];
       renumberRows();
     });
   };
