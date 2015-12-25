@@ -34,8 +34,7 @@ var secretsanta = secretsanta || {};
         "<td class='partner'>" + partnerLabel + "</td>" +
         "<td><button type='button' onclick='secretsanta.deleteParticipant($(this))'>DELETE</button></td></tr>");
     }else{
-      //TODO mettre une belle popup
-      alert('nop, le participant ' + name + ' existe deja');
+      displayModal('Sorry, the name "' + name + '" is already in the list.');
     }
   };
 
@@ -44,6 +43,11 @@ var secretsanta = secretsanta || {};
       $("#participants tr td.participantName:contains(" + participantName + ")" ).siblings('.partner').html('');
       participants[participantName] = '';
     }
+  };
+
+  var displayModal = function(text) {
+    $('.modal-body').text(text);
+    $('.modal').modal();
   };
 
   //public static functions called from html
@@ -69,13 +73,11 @@ var secretsanta = secretsanta || {};
             addOneParticipant(participant1, participant2);
             addOneParticipant(participant2, participant1);
           }else{
-            //TODO mettre une belle popup
-            alert("nop, les deux personnes on le meme nom");
+            displayModal("Sorry, the names are identical.");
           }
           break;
         default:
-          //TODO mettre une belle popup
-          alert('nop pas de menage a trois ou plus');
+          displayModal('Sorry, the algorithm has not been designed for polyamory relationships. :(');
       }
     }
   };

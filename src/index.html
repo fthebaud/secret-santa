@@ -16,6 +16,18 @@
 
 <body>
 
+  <div class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">OOPS!</h4>
+        </div>
+        <div class="modal-body">
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="container">
     <div class="jumbotron">
       <h1> Secret Santa</h1>
@@ -25,14 +37,14 @@
     <div class="row">
       <div class="col-md-6">
         <div class="input-group">
-          <input type="text" name="newParticipant" class="form-control" placeholder="Enter the name of a participant" onkeypress="secretsanta.addParticipantKeypress(event)"/>
+          <input type="text" name="newParticipant" class="form-control input-lg" placeholder="Enter the name of a participant" onkeypress="secretsanta.addParticipantKeypress(event)" />
           <span class="input-group-btn">
-            <button type="button" class="btn btn-info" onclick="secretsanta.addParticipant()">Add</button>
+            <button type="button" class="btn btn-primary btn-lg" onclick="secretsanta.addParticipant()">Add</button>
           </span>
         </div>
       </div>
       <div class="col-md-6">
-        <button type="button" class="btn btn-block btn-warning">Draw at random!</button>
+        <button type="button" class="btn btn-block btn-primary btn-lg" data-toggle="modal" data-target=".modal">Draw at random!</button>
       </div>
     </div>
   </div>
