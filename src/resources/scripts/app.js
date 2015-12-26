@@ -8,6 +8,10 @@ var secretsanta = secretsanta || {};
   //private stuff (hidden in the closure)
   var participants = {};
 
+  var nbCouples = 0;
+
+  var nbSingles = 0;
+
   var separator = 'and';
 
   var capitalizeFirstLetter = function(string) {
@@ -26,28 +30,54 @@ var secretsanta = secretsanta || {};
     if (partner) {
       partner = capitalizeFirstLetter(partner);
     }
-    if(!participants.hasOwnProperty(name)){
+    if (!participants.hasOwnProperty(name)) {
       participants[name] = partner;
       var partnerLabel = partner ? "(in a couple with " + partner + ")" : "";
       $("#participants").prepend("<tr class='participant'><td class='rowNumber'>" + Object.keys(participants).length + "</td>" +
         "<td class='participantName'>" + name + "</td>" +
         "<td class='partner'>" + partnerLabel + "</td>" +
         "<td><button type='button' onclick='secretsanta.deleteParticipant($(this))'>DELETE</button></td></tr>");
-    }else{
+    } else {
       displayModal('Sorry, the name "' + name + '" is already in the list.');
     }
   };
 
-  var makeSingle =function(participantName){
-    if (participantName) {
-      $("#participants tr td.participantName:contains(" + participantName + ")" ).siblings('.partner').html('');
-      participants[participantName] = '';
-    }
+  var makeSingle = function(participantName) {
+    $("#participants tr td.participantName:contains(" + participantName + ")").siblings('.partner').html('');
+    participants[participantName] = '';
   };
 
   var displayModal = function(text) {
     $('.modal-body').text(text);
     $('.modal').modal();
+  };
+
+  var drawConditionOK = function() {
+    var errorText = 'Sorry, Impossible to draw at random ';
+    if (nbSingles === 0 ) {
+      if (nbCouples === 0) {
+        displayModal(errorText + '(no participants!).');
+        return false;
+      }else {
+        if (nbCouples === 1) {
+          displayModal(errorText + '(only one couple).');
+          return false;
+        }
+         return true;
+      }
+    }
+    if (nbSingles === 1) {
+      if (nbCouples === 0) {
+        displayModal(errorText + '(only one person!).');
+        return false;
+      }
+      if (nbCouples === 1) {
+        displayModal(errorText + '(only one person and one couple).');
+        return false;
+      }
+      return true;
+    }
+    return true;
   };
 
   //public static functions called from html
@@ -65,14 +95,16 @@ var secretsanta = secretsanta || {};
       switch (participantsTab.length) {
         case 1:
           addOneParticipant(participantsTab[0]);
+          nbSingles ++;
           break;
         case 2:
           var participant1 = $.trim(participantsTab[0]);
           var participant2 = $.trim(participantsTab[1]);
-          if (participant1 !== participant2){
+          if (participant1 !== participant2) {
             addOneParticipant(participant1, participant2);
             addOneParticipant(participant2, participant1);
-          }else{
+            nbCouples ++;
+          } else {
             displayModal("Sorry, the names are identical.");
           }
           break;
@@ -87,10 +119,23 @@ var secretsanta = secretsanta || {};
     var participantName = row.children(".participantName").html();
     row.hide('slow', function() {
       $(this).remove();
-      makeSingle(participants[participantName]);
+      //s'il avait un partenaire, ce partenaire devient celibataire
+      if (participants[participantName]) {
+        makeSingle(participants[participantName]);
+        nbCouples--;
+        nbSingles++;
+      } else {
+        nbSingles--;
+      }
       delete participants[participantName];
       renumberRows();
     });
+  };
+
+  secretsanta.drawAtRandom = function() {
+    if (drawConditionOK()) {
+      alert("tirage");
+    }
   };
 
 }());
