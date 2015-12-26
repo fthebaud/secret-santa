@@ -54,16 +54,16 @@ var secretsanta = secretsanta || {};
 
   var drawConditionOK = function() {
     var errorText = 'Sorry, Impossible to draw at random ';
-    if (nbSingles === 0 ) {
+    if (nbSingles === 0) {
       if (nbCouples === 0) {
         displayModal(errorText + '(no participants!).');
         return false;
-      }else {
+      } else {
         if (nbCouples === 1) {
           displayModal(errorText + '(only one couple).');
           return false;
         }
-         return true;
+        return true;
       }
     }
     if (nbSingles === 1) {
@@ -78,6 +78,47 @@ var secretsanta = secretsanta || {};
       return true;
     }
     return true;
+  };
+
+  var draw = function() {
+    var resultat = {};
+    var givers = Object.keys(participants);
+    var receivers = Object.keys(participants);
+    var nbParticipants = givers.length;
+    var i = 0;
+    //TODO what is the last two persons are in a couple : infinite loop
+    while (nbParticipants > 0 && i < (nbParticipants * 20)) {
+      i++;
+      if (i === (nbParticipants * 20)) {
+        displayModal('Boucle infinie !');
+      } else {
+        var randomNumberGiver = Math.floor((Math.random() * nbParticipants));
+        var randomNumberReceiver = Math.floor((Math.random() * nbParticipants));
+        var giver = givers[randomNumberGiver];
+        var receiver = receivers[randomNumberReceiver];
+        if (giver !== receiver && participants[giver] !== receiver) {
+          console.debug(giver + " => " + receiver);
+          resultat[giver] = receiver;
+          givers.splice(randomNumberGiver, 1);
+          receivers.splice(randomNumberReceiver, 1);
+          nbParticipants--;
+        }
+      }
+    }
+    //TODO ne pas afficher le resultat si on a eu une boucle infinie...
+    displayResult(resultat);
+  };
+
+  var displayResult = function(resultat) {
+    $("#participants tbody tr").remove();
+    var i = 1;
+    for (var prop in resultat) {
+      if (resultat.hasOwnProperty(prop)) {
+        var line = "<tr><td>" + i + "</td><td>" + prop + "</td><td>give to</td><td>" + resultat[prop] + "</td></tr>";
+        $("#participants tbody ").append(line);
+        i++;
+      }
+    }
   };
 
   //public static functions called from html
@@ -95,7 +136,7 @@ var secretsanta = secretsanta || {};
       switch (participantsTab.length) {
         case 1:
           addOneParticipant(participantsTab[0]);
-          nbSingles ++;
+          nbSingles++;
           break;
         case 2:
           var participant1 = $.trim(participantsTab[0]);
@@ -103,7 +144,7 @@ var secretsanta = secretsanta || {};
           if (participant1 !== participant2) {
             addOneParticipant(participant1, participant2);
             addOneParticipant(participant2, participant1);
-            nbCouples ++;
+            nbCouples++;
           } else {
             displayModal("Sorry, the names are identical.");
           }
@@ -134,8 +175,15 @@ var secretsanta = secretsanta || {};
 
   secretsanta.drawAtRandom = function() {
     if (drawConditionOK()) {
-      alert("tirage");
+      draw();
     }
+  };
+
+  secretsanta.reset = function() {
+    $("#participants tbody tr").remove();
+    participants = {};
+    nbCouples = 0;
+    nbSingles = 0;
   };
 
 }());
