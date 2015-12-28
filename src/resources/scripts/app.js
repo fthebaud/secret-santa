@@ -86,27 +86,25 @@ var secretsanta = secretsanta || {};
     var receivers = Object.keys(participants);
     var nbParticipants = givers.length;
     var i = 0;
-    //TODO what is the last two persons are in a couple : infinite loop
     while (nbParticipants > 0 && i < (nbParticipants * 20)) {
       i++;
-      if (i === (nbParticipants * 20)) {
-        displayModal('Boucle infinie !');
-      } else {
-        var randomNumberGiver = Math.floor((Math.random() * nbParticipants));
-        var randomNumberReceiver = Math.floor((Math.random() * nbParticipants));
-        var giver = givers[randomNumberGiver];
-        var receiver = receivers[randomNumberReceiver];
-        if (giver !== receiver && participants[giver] !== receiver) {
-          console.debug(giver + " => " + receiver);
-          resultat[giver] = receiver;
-          givers.splice(randomNumberGiver, 1);
-          receivers.splice(randomNumberReceiver, 1);
-          nbParticipants--;
-        }
+      var randomNumberGiver = Math.floor((Math.random() * nbParticipants));
+      var randomNumberReceiver = Math.floor((Math.random() * nbParticipants));
+      var giver = givers[randomNumberGiver];
+      var receiver = receivers[randomNumberReceiver];
+      if (giver !== receiver && participants[giver] !== receiver) {
+        console.debug(giver + " => " + receiver);
+        resultat[giver] = receiver;
+        givers.splice(randomNumberGiver, 1);
+        receivers.splice(randomNumberReceiver, 1);
+        nbParticipants--;
       }
     }
-    //TODO ne pas afficher le resultat si on a eu une boucle infinie...
-    displayResult(resultat);
+    if (givers.length === 0) {
+      displayResult(resultat);
+    } else {
+      displayModal('Impossible to complete the draw, please try again (Infinite loop).');
+    }
   };
 
   var displayResult = function(resultat) {
