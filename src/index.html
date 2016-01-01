@@ -16,6 +16,7 @@
 
 <body>
 
+  <!-- the popup for error messages -->
   <div class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
@@ -33,6 +34,7 @@
       <h1> Secret Santa</h1>
       <p>Please enter the name of the participants.</p>
       <p>Participants can be added as couples (so that people won't have their significant other as secret santa). To do so, enter the two names separated by "and".</p>
+      <span data-i18n="test.fth"></span>
     </div>
     <div class="row">
       <div class="col-md-6">
@@ -71,17 +73,33 @@
 
   <footer class="footer">
     <div class="container">
-      The MIT License (MIT)<br/>
-      Copyright © 2015 fthebaud
+      The MIT License (MIT)
+      <br/> Copyright © 2015 fthebaud
     </div>
   </footer>
 
-
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="external-resources/scripts/jquery.js"></script>
   <script src="external-resources/scripts/bootstrap.js"></script>
+  <script src="external-resources/scripts/i18next-jquery.min.js"></script>
 
   <script src="resources/scripts/app.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      i18nextJquery.init(i18nextInstance, $, {
+        tName: 't', // --> appends $.t = i18next.t
+        i18nName: 'i18n', // --> appends $.i18n = i18next
+        handleName: 'localize', // --> appends $(selector).localize(opts);
+        selectorAttr: 'data-i18n', // selector for translating elements
+        targetAttr: 'data-i18n-target', // element attribute to grab target element to translate (if diffrent then itself)
+        optionsAttr: 'data-i18n-options', // element attribute that contains options, will load/set if useOptionsAttr = true
+        useOptionsAttr: false, // see optionsAttr
+        parseDefaultValueFromContent: true // parses default values from content ele.val or ele.text
+      });
+      $("body").localize();
+
+    });
+  </script>
 
 </body>
 

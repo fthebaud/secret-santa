@@ -22,6 +22,9 @@ module.exports = function (grunt) {
                     src : 'node_modules/bootstrap/dist/js/bootstrap.js',
                     dest: 'src/external-resources/scripts/bootstrap.js'
                 },{
+                    src: 'node_modules/jquery-i18next/i18next-jquery.min.js',
+                    dest: 'src/external-resources/scripts/i18next-jquery.min.js'
+                },{
                     src: 'node_modules/bootstrap/dist/css/bootstrap.css',
                     dest: 'src/external-resources/css/bootstrap.css'
                 }]
@@ -37,7 +40,7 @@ module.exports = function (grunt) {
                     banner: '/* My minified css file */'
                 },
                 files: {
-                    'dist/css/site.min.css': [  
+                    'dist/css/site.min.css': [
                         'node_modules/bootstrap/dist/css/bootstrap.min.css'
                     ]
                 }
