@@ -6,10 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
   <title>Secret Santa</title>
 
-  <!-- Bootstrap -->
   <link href="external-resources/css/bootstrap.css" rel="stylesheet">
+  <link href="resources/styles/style-main.css" rel="stylesheet">
 
   <link rel="icon" type="image/png" href="resources/images/favicon.png" />
 </head>
@@ -35,7 +36,7 @@
       <p>Participants can be added as couples (so that people won't have their significant other as secret santa). To do so, enter the two names separated by "and".</p>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 mb10">
         <div class="input-group">
           <input type="text" name="newParticipant" class="form-control input-lg" placeholder="Enter the name of a participant" onkeypress="secretsanta.addParticipantKeypress(event)" />
           <span class="input-group-btn">
@@ -43,7 +44,7 @@
           </span>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 mb10">
         <button type="button" class="btn btn-block btn-primary btn-lg" onclick="secretsanta.drawAtRandom()">Draw at random!</button>
       </div>
     </div>
