@@ -22,10 +22,9 @@ npm install
 
 - Deploy the application locally in debug mode (without minification, concatenation, etc.) :
 ```sh
+# Application will be live at http://localhost:9090/index.html
 npm run serve:debug
 ```
-Application is live at http://localhost:9090/index.html
-
 
 - Deploy the application on a github page
 
