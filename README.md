@@ -1,6 +1,6 @@
 # secret-santa
 
-This project uses npm for dependency management, and do run command (with the help of grunt behind the scenes)
+This project uses npm for dependency management and to run scripts/commands (with the help of grunt behind the scenes)
 
 ### Projet setup:
 - Please install globally the following node modules
