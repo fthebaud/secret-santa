@@ -31,6 +31,6 @@ npm run serve:debug
  - solution 1 : Build the application, then manually copy the content of the dist directory in the gh-pages branch and push to remote.
 
  - solution 2 : Use a subtree. The drawback is that git has to know about your subtree, i.e. first we have to commit generated files in project's source control. To automatically push a new version after each commit, use a post-commit hook (see http://githooks.com/).
-```sh
- git subtree push --prefix dist origin gh-pages
-```
+ ```sh
+  git subtree push --prefix dist origin gh-pages
+ ```
