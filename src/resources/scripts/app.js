@@ -112,7 +112,7 @@ var secretsanta = secretsanta || {};
     var i = 1;
     for (var prop in resultat) {
       if (resultat.hasOwnProperty(prop)) {
-        var line = "<tr><td>" + i + "</td><td>" + prop + "</td><td>give to</td><td>" + resultat[prop] + "</td></tr>";
+        var line = "<tr><td>" + i + "</td><td>" + prop + "</td><td>gives to</td><td>" + resultat[prop] + "</td></tr>";
         $("#participants tbody ").append(line);
         i++;
       }
