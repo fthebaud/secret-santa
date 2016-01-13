@@ -22,8 +22,11 @@
   },
   "scripts": {
     "grunt": "grunt",
-    "preserve:debug": "npm run grunt copy:externalresources",
+    "preserve:debug": "npm run grunt clean:externalResourcesDebug copy:externalResourcesDebug",
     "serve:debug": "http-server -p 9090 ./src",
-    "bundle": "npm run grunt"
+    "build": "npm run grunt",
+    "preserve:release": "npm run build",
+    "serve:release": "http-server -p 9090 ./dist",
+    "serve": "npm run serve:release"
   }
 }

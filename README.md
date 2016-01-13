@@ -20,10 +20,22 @@ npm install
 
 ### Commands:
 
-- Deploy the application locally in debug mode (without minification, concatenation, etc.) :
+- Deploy the application locally in debug mode (without minification, concatenation, etc.):
 ```sh
 # Application will be live at http://localhost:9090/index.html
 npm run serve:debug
+```
+
+- Deploy the application locally:
+```sh
+# Application will be live at http://localhost:9090/index.html
+npm run serve
+```
+
+- Build the application (minify, concat, etc.):
+```sh
+# Application will be build under the dist directory
+npm run build
 ```
 
 - Deploy the application on a github page

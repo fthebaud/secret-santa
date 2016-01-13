@@ -11,10 +11,11 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         clean: {
-            release: ["dist"]
+            release: ["dist"],
+            externalResourcesDebug: ["src/external-resources"]
         },
         copy: {
-            externalresources : {
+            externalResourcesDebug : {
                 files: [{
                     src: 'node_modules/jquery/dist/jquery.js',
                     dest: 'src/external-resources/scripts/jquery.js'
@@ -27,18 +28,23 @@ module.exports = function (grunt) {
                 }]
             },
             release: {
-                    src: 'src/index.html',
-                    dest: 'dist/index.html'
+              files: [{
+                src: 'src/index.html',
+                dest: 'dist/index.html'
+              }, {
+                expand : true,
+                cwd: 'src/resources/images/',
+                src: '*',
+                dest: 'dist/resources/images'
+              }]
             }
         },
         cssmin: {
             sitecss: {
-                options: {
-                    banner: '/* My minified css file */'
-                },
                 files: {
-                    'dist/css/site.min.css': [  
-                        'node_modules/bootstrap/dist/css/bootstrap.min.css'
+                    'dist/resources/css/site.min.css': [
+                        'node_modules/bootstrap/dist/css/bootstrap.min.css',
+                        'src/resources/styles/style-main.css'
                     ]
                 }
             }
@@ -50,9 +56,10 @@ module.exports = function (grunt) {
             applib: {
                 src: [
                     'node_modules/jquery/dist/jquery.min.js',
-                    'node_modules/bootstrap/dist/js/bootstrap.min.js'
+                    'node_modules/bootstrap/dist/js/bootstrap.min.js',
+                    'src/resources/scripts/app.js'
                 ],
-                dest: 'dist/js/everything.js'
+                dest: 'dist/resources/js/everything.js'
             }
         }
     });
