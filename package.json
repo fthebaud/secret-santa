@@ -4,7 +4,7 @@
   "description": "secret santa web app",
   "main": "index.js",
   "author": "Fabien Thebaud",
-  "license": "CC BY-NC-SA 4.0",
+  "license": "CC-BY-NC-SA-4.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/fthebaud/secret-santa.git"
@@ -18,13 +18,14 @@
     "grunt-contrib-clean": "0.7.0",
     "grunt-contrib-copy": "0.8.2",
     "grunt-contrib-cssmin": "0.14.0",
-    "grunt-contrib-uglify": "0.11.0"
+    "grunt-contrib-uglify": "0.11.0",
+    "grunt-processhtml": "0.3.8"
   },
   "scripts": {
     "grunt": "grunt",
     "preserve:debug": "npm run grunt clean:externalResourcesDebug copy:externalResourcesDebug",
     "serve:debug": "http-server -p 9090 ./src",
-    "build": "npm run grunt",
+    "build": "npm run grunt build",
     "preserve:release": "npm run build",
     "serve:release": "http-server -p 9090 ./dist",
     "serve": "npm run serve:release"
