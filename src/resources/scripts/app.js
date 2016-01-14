@@ -81,6 +81,7 @@ var secretsanta = secretsanta || {};
   };
 
   var draw = function() {
+    console.debug(participants);
     var resultat = {};
     var givers = Object.keys(participants);
     var receivers = Object.keys(participants);
@@ -103,7 +104,7 @@ var secretsanta = secretsanta || {};
     if (givers.length === 0) {
       displayResult(resultat);
     } else {
-      displayModal('Impossible to complete the draw, please try again (Infinite loop).');
+      displayModal('Impossible to complete the draw, please try again.');
     }
   };
 
