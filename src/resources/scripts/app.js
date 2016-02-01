@@ -1,7 +1,5 @@
 //namespace : window.secretsanta
-var secretsanta = secretsanta || {};
-
-(function() {
+var secretsanta = (function() {
   /*global $:false */
   "use strict";
 
@@ -121,13 +119,13 @@ var secretsanta = secretsanta || {};
   };
 
   //public static functions called from html
-  secretsanta.addParticipantKeypress = function(event) {
+  var addParticipantKeypress = function(event) {
     if (event.which == 13) {
       secretsanta.addParticipant();
     }
   };
 
-  secretsanta.addParticipant = function() {
+  var addParticipant = function() {
     var newParticipant = $('input[name=newParticipant]').val();
     $('input[name=newParticipant]').val('');
     if (newParticipant) {
@@ -154,7 +152,7 @@ var secretsanta = secretsanta || {};
     }
   };
 
-  secretsanta.deleteParticipant = function(deleteButtonJq) {
+  var deleteParticipant = function(deleteButtonJq) {
     var row = deleteButtonJq.parent().parent();
     var participantName = row.children(".participantName").html();
     row.hide('slow', function() {
@@ -172,17 +170,25 @@ var secretsanta = secretsanta || {};
     });
   };
 
-  secretsanta.drawAtRandom = function() {
+  var drawAtRandom = function() {
     if (drawConditionOK()) {
       draw();
     }
   };
 
-  secretsanta.reset = function() {
+  var reset = function() {
     $("#participants tbody tr").remove();
     participants = {};
     nbCouples = 0;
     nbSingles = 0;
+  };
+
+  return {
+    addParticipantKeypress: addParticipantKeypress,
+    addParticipant: addParticipant,
+    deleteParticipant: deleteParticipant,
+    drawAtRandom: drawAtRandom,
+    reset: reset
   };
 
 }());
