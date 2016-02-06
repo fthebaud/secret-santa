@@ -2,18 +2,20 @@
 module.exports = function(grunt) {
 
   // Load the plugins
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-processhtml');
+  grunt.loadNpmTasks('grunt-filerev');
+  grunt.loadNpmTasks('grunt-usemin');
 
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     clean: {
-      release: ["dist"],
-      externalResourcesDebug: ["src/external-resources"]
+      externalResourcesDebug: ["src/external-resources"],
+      release: ['dist/']
     },
     copy: {
       externalResourcesDebug: {
@@ -30,46 +32,47 @@ module.exports = function(grunt) {
       },
       release: {
         files: [{
+          src: 'src/index.html',
+          dest: 'dist/index.html'
+        }, {
           expand: true,
-          cwd: 'src/resources/images/',
-          src: '*',
+          cwd: 'src/resources/images',
+          src: '**',
           dest: 'dist/resources/images'
+        }]
+
+      }
+    },
+    filerev: {
+      options: {
+        encoding: 'utf8',
+        algorithm: 'md5',
+        length: 20
+      },
+      source: {
+        files: [{
+          src: [
+            'dist/**/*.js',
+            'dist/**/*.css'
+          ]
         }]
       }
     },
-    cssmin: {
-      sitecss: {
-        files: {
-          'dist/resources/css/secretsanta.min.css': [
-            'node_modules/bootstrap/dist/css/bootstrap.min.css',
-            'src/resources/styles/style-main.css'
-          ]
-        }
-      }
-    },
-    uglify: {
+    //useminPrepare will generate the config for cssmin, uglify, etc...
+    useminPrepare: {
+      html: 'src/index.html',
       options: {
-        compress: true,
-        banner:'/*!bootstrap + jquery + secretsanta*/'
-      },
-      applib: {
-        src: [
-          'node_modules/jquery/dist/jquery.min.js',
-          'node_modules/bootstrap/dist/js/bootstrap.min.js',
-          'src/resources/scripts/app.js'
-        ],
-        dest: 'dist/resources/js/secretsanta.min.js'
+        dest: 'dist'
       }
     },
-    processhtml: {
-      dist: {
-        files: {
-          'dist/index.html': ['src/index.html']
-        }
-      }
+    usemin: {
+      //html we want to update
+      html: ['dist/index.html']
     }
   });
 
-  //clean the release directory, minify and concat js, minify and concat css, process (update path) and copy html, and finally copy other resources like images
-  grunt.registerTask('build', ['clean:release', 'uglify', 'cssmin', 'processhtml', 'copy:release']);
+  //build task: clean the release directory, minify and concat js, minify and concat css, process (update path) and copy html, and finally copy other resources like images
+  grunt.registerTask('build', ['clean:release', 'copy:release', 'useminPrepare', 'concat', 'uglify', 'cssmin',
+    'filerev', 'usemin'
+  ]);
 };
