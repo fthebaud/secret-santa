@@ -16,11 +16,15 @@ body {
   margin-bottom: 76px;
 }
 
+h1 {
+  text-align: center;
+}
+
 .stickyfooter {
   position : absolute;
   bottom : 0;
   width: 100%;
-  /*taille assez élevée pour contenir tout les éléments du footer en cas de compression horizontale*/
+  /*taille assez elevee pour contenir tout les elements du footer en cas de compression horizontale*/
   height: 76px;
   background-color: #eee;
 }
@@ -29,4 +33,9 @@ body {
   padding-top: 6px;
   font-size: 12px;
   text-align: center;
+}
+
+footer .timestamp {
+  font-size: 10px;
+  font-style: italic;
 }

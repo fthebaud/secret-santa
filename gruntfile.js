@@ -9,6 +9,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-filerev');
   grunt.loadNpmTasks('grunt-usemin');
+  grunt.loadNpmTasks('grunt-replace');
 
   // Project configuration.
   grunt.initConfig({
@@ -53,26 +54,44 @@ module.exports = function(grunt) {
         files: [{
           src: [
             'dist/**/*.js',
-            'dist/**/*.css'
+            'dist/**/*.css',
+            'dist/**/*.png'
           ]
         }]
       }
     },
-    //useminPrepare will generate the config for cssmin, uglify, etc...
+    //useminPrepare will generate the config for concat, uglify and cssmin
     useminPrepare: {
       html: 'src/index.html',
       options: {
         dest: 'dist'
       }
     },
+    //usemin will update the path in the html file
     usemin: {
-      //html we want to update
       html: ['dist/index.html']
+    },
+    //replace will insert a timestamp at the end of the build
+    replace: {
+      dist: {
+        options: {
+          patterns: [{
+            match: 'timestamp',
+            replacement: grunt.template.today('dd/mm/yyyy HH:MM:ss')
+          }]
+        },
+        files: [{
+          expand: true,
+          flatten: true,
+          src: 'dist/index.html',
+          dest: 'dist/'
+        }]
+      }
     }
   });
 
-  //build task: clean the release directory, minify and concat js, minify and concat css, process (update path) and copy html, and finally copy other resources like images
+  //build task. use --verbose for details.
   grunt.registerTask('build', ['clean:release', 'copy:release', 'useminPrepare', 'concat', 'uglify', 'cssmin',
-    'filerev', 'usemin'
+    'filerev', 'usemin', 'replace'
   ]);
 };
