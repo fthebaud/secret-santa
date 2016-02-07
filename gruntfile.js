@@ -90,8 +90,11 @@ module.exports = function(grunt) {
     }
   });
 
+  //copy external resources
+  grunt.registerTask('fetchExternalResources', ['clean:externalResourcesDebug', 'copy:externalResourcesDebug' ]);
+
   //build task. use --verbose for details.
-  grunt.registerTask('build', ['clean:release', 'copy:release', 'useminPrepare', 'concat', 'uglify', 'cssmin',
+  grunt.registerTask('build', ['fetchExternalResources', 'clean:release', 'copy:release', 'useminPrepare', 'concat', 'uglify', 'cssmin',
     'filerev', 'usemin', 'replace'
   ]);
 };

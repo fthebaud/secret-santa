@@ -26,7 +26,7 @@
   },
   "scripts": {
     "grunt": "grunt",
-    "preserve:debug": "npm run grunt clean:externalResourcesDebug copy:externalResourcesDebug",
+    "preserve:debug": "npm run grunt fetchExternalResources",
     "serve:debug": "http-server -p 9090 ./src",
     "build": "npm run grunt build",
     "preserve:release": "npm run build",
