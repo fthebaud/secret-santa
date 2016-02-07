@@ -26,10 +26,10 @@ npm install
 npm run serve:debug
 ```
 
-- Deploy the application locally:
+- Build and deploy the application locally:
 ```sh
 # Application will be live at http://localhost:9090/index.html
-npm run serve
+npm run serve:release
 ```
 
 - Build the application (minify, concat, etc.):
