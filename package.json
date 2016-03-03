@@ -2,9 +2,9 @@
   "name": "secret-santa",
   "version": "1.0.0",
   "description": "secret santa web app",
-  "main": "index.js",
   "author": "Fabien Thebaud",
   "license": "CC-BY-NC-SA-4.0",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/fthebaud/secret-santa.git"

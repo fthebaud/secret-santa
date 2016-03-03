@@ -2,11 +2,15 @@ var path = require('path');
 
 module.exports = {
   resolve : {
-    // TODO: voir si le build est plus rapide en étant plus précis au niveau du node_modules
-    modulesDirectories: ['src/javascript', 'node_modules']
+    // TODO: utilite du '' ?
+    extensions: ['','.js'],
+    //pour pouvoir faire require('js/secret-santa'); au lieu de require('./src/js/secret-santa');
+    root: path.resolve(__dirname, 'src'),
+    // TODO: voir si le build est plus rapide en etant plus precis au niveau du node_modules
+    modulesDirectories: ['node_modules']
   },
   entry: {
-    "secret-santa": ['./src/main.js']
+    "secret-santa": ['./src/index.js']
   },
   output: {
     filename: '[name]-bundle.js',
