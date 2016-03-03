@@ -1,5 +1,4 @@
-//namespace : window.secretsanta
-var secretsanta = (function() {
+(function() {
   /*global $:false */
   "use strict";
 
