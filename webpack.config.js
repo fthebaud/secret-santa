@@ -1,13 +1,12 @@
 var path = require('path');
+var CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-  resolve : {
-    // TODO: utilite du '' ?
-    extensions: ['','.js'],
-    //pour pouvoir faire require('js/secret-santa'); au lieu de require('./src/js/secret-santa');
-    root: path.resolve(__dirname, 'src'),
-    // TODO: voir si le build est plus rapide en etant plus precis au niveau du node_modules
-    modulesDirectories: ['node_modules']
+  resolve: {
+    extensions: ['', '.js'], //extensions to add when resolving modules (dont entry !)
+    //directories in which we should look for modules
+    root: [path.resolve(__dirname, 'src')], //root of our project (absolute path)
+    modulesDirectories: ['node_modules'] //directories for modules resolved via node's resolving algorithm
   },
   entry: {
     "secret-santa": ['./src/index.js']
@@ -17,5 +16,18 @@ module.exports = {
     path: path.join(__dirname, 'build'),
     libraryTarget: 'var',
     library: 'secretsanta'
-  }
+  },
+  module: {
+    loaders: [{
+      test: /\.html$/,
+      loader: "file-loader?name=[name].html"
+    }]
+  },
+  plugins: [
+    new CleanWebpackPlugin(['build'], {
+      root: path.resolve(__dirname),
+      verbose: true,
+      dry: false
+    })
+  ]
 };
