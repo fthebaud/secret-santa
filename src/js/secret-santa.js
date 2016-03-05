@@ -1,8 +1,3 @@
-(function() {
-  /*global $:false */
-  "use strict";
-
-  //private stuff (hidden in the closure)
   var participants = {};
 
   var nbCouples = 0;
@@ -182,12 +177,10 @@
     nbSingles = 0;
   };
 
-  return {
+  module.exports = {
     addParticipantKeypress: addParticipantKeypress,
     addParticipant: addParticipant,
     deleteParticipant: deleteParticipant,
     drawAtRandom: drawAtRandom,
     reset: reset
   };
-
-}());
