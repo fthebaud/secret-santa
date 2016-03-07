@@ -1,4 +1,6 @@
 require('jquery');
+require('bootstrap');
+
 require('bootstrap.min');
 
 require('index.html');
