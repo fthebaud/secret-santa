@@ -1,7 +1,7 @@
 require('jquery');
 require('bootstrap');
 
-require('bootstrap.min');
+require('bootstrap.css');
 
 require('index.html');
 require('css/style-main');

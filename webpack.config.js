@@ -17,41 +17,59 @@ module.exports = {
     "secret-santa": ['./src/index.js']
   },
   output: {
-    filename: '[name]-bundle.js',
+    filename: 'resources/[name]-bundle.js',
     path: path.join(__dirname, 'build'),
     libraryTarget: 'var',
     library: 'secretsanta'
   },
   module: {
     loaders: [{
-      test: /\.html$/,
-      loader: "file-loader?name=[name].html"
-    }, {
       test: /\.css$/,
       loader: ExtractTextPlugin.extract('css-loader')
     }, {
+      test: /\.html$/,
+      loader: "file-loader",
+      query: {
+        name: '[name].[ext]'
+      }
+    }, {
       test: /\.eot$/,
-      loader: "file-loader"
+      loader: "file-loader",
+      query: {
+        name: 'resources/[name].[ext]'
+      }
     }, {
       test: /\.(woff|woff2)$/,
       loader: "url-loader",
       query: {
         limit: '5000',
-        prefix: 'font/'
+        prefix: 'font/',
+        name: 'resources/[name].[ext]'
       }
     }, {
       test: /\.ttf$/,
       loader: "url-loader",
       query: {
         limit: '10000',
-        mimetype: 'application/octet-stream'
+        mimetype: 'application/octet-stream',
+        name: 'resources/[name].[ext]'
       }
     }, {
       test: /\.svg$/,
       loader: "url-loader",
       query: {
         limit: '10000',
-        mimetype: 'image/svg+xml'
+        mimetype: 'image/svg+xml',
+        name: 'resources/[name].[ext]'
+      }
+    }, {
+      // TODO: tester en url loader
+      test: /\.png$/,
+      loader: "file-loader",
+      query: {
+        limit: '10000',
+        mimetype: 'image/png',
+        name: 'resources/[name].[ext]'
       }
     }]
   },
@@ -61,7 +79,7 @@ module.exports = {
       verbose: true,
       dry: false
     }),
-    new ExtractTextPlugin('[name].css'),
+    new ExtractTextPlugin('resources/[name].css'),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: "jquery",
