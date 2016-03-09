@@ -21,7 +21,7 @@ module.exports = {
     "secret-santa": ['index.js']
   },
   output: {
-    filename: 'resources/[name]-bundle.js',
+    filename: 'resources/[name]-bundle-[hash].js',
     path: path.join(__dirname, 'build'),
     libraryTarget: 'var',
     library: 'secretsanta'
@@ -78,13 +78,13 @@ module.exports = {
       dry: false
     }),
     //cssExtractor
-    new ExtractTextPlugin('resources/[name].css'),
+    new ExtractTextPlugin('resources/[name]-bundle-[hash].css'),
+    new HtmlWebpackPlugin({
+      template: 'index.html'
+    }),
     new webpack.ProvidePlugin({
       $: 'jquery',
-      jQuery: "jquery",
+      jQuery: "jquery"
     }),
-    new HtmlWebpackPlugin({
-      template: 'html/index.html'
-    })
   ]
 };

@@ -10,3 +10,5 @@ require('bootstrap.css');
 require('css/style-main');
 // js
 module.exports = require('js/secret-santa');
+// png
+require('images/favicon.png')
