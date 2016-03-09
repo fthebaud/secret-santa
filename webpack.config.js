@@ -1,8 +1,11 @@
+// modules dependencies
 var path = require('path');
 var webpack = require("webpack");
+
+// plugins dependencies
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   target: 'web',
@@ -13,8 +16,9 @@ module.exports = {
     root: [path.resolve(__dirname, 'src')], //root of our project (absolute path)
     modulesDirectories: ['node_modules', 'node_modules/bootstrap/dist/css'] //directories for modules resolved via node's resolving algorithm
   },
+  context: path.resolve(__dirname, 'src'),
   entry: {
-    "secret-santa": ['./src/index.js']
+    "secret-santa": ['index.js']
   },
   output: {
     filename: 'resources/[name]-bundle.js',
@@ -26,12 +30,6 @@ module.exports = {
     loaders: [{
       test: /\.css$/,
       loader: ExtractTextPlugin.extract('css-loader')
-    }, {
-      test: /\.html$/,
-      loader: "file-loader",
-      query: {
-        name: '[name].[ext]'
-      }
     }, {
       test: /\.eot$/,
       loader: "file-loader",
@@ -79,10 +77,14 @@ module.exports = {
       verbose: true,
       dry: false
     }),
+    //cssExtractor
     new ExtractTextPlugin('resources/[name].css'),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: "jquery",
+    }),
+    new HtmlWebpackPlugin({
+      template: 'index.html'
     })
   ]
 };
