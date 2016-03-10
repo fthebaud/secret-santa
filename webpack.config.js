@@ -18,7 +18,8 @@ module.exports = {
   },
   context: path.resolve(__dirname, 'src'),
   entry: {
-    "secret-santa": ['index.js']
+    // /!\ array : only the last module is exported !
+    "secret-santa": ['vendor.js', 'app.js']
   },
   output: {
     filename: 'resources/[name]-bundle-[hash].js',

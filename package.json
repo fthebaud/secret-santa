@@ -4,7 +4,7 @@
   "description": "secret santa web app",
   "author": "Fabien Thebaud",
   "license": "CC-BY-NC-SA-4.0",
-  "main": "src/index.js",
+  "main": "webpack.config.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/fthebaud/secret-santa.git"

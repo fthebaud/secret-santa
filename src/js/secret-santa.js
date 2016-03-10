@@ -177,10 +177,15 @@
     nbSingles = 0;
   };
 
+  var addEventListeners = function () {
+    console.log('todo');
+  };
+
   module.exports = {
     addParticipantKeypress: addParticipantKeypress,
     addParticipant: addParticipant,
     deleteParticipant: deleteParticipant,
     drawAtRandom: drawAtRandom,
-    reset: reset
+    reset: reset,
+    addEventListeners: addEventListeners
   };
