@@ -61,13 +61,12 @@ module.exports = {
         name: 'resources/[name].[ext]'
       }
     }, {
-      // TODO: tester en url loader
       test: /\.png$/,
-      loader: "file-loader",
+      loader: "url-loader",
       query: {
         limit: '10000',
         mimetype: 'image/png',
-        name: 'resources/[name].[ext]'
+        name: 'resources/[name]-[hash].[ext]'
       }
     }]
   },
@@ -79,8 +78,16 @@ module.exports = {
     }),
     //cssExtractor
     new ExtractTextPlugin('resources/[name]-bundle-[hash].css'),
+    //This plugins will (maybe not in that order..):
+    //1- load the html page through the html-loader. This will change <img src="image.png"> into require("./image.png")
+    //2- resolve the require of the images (using the specified file or url loaders)
+    //3- add a link to our js bundle
+    //4- add a link to our extracted css bundle
+    //6- add a link to the favicon
+    // TODO: hash favicon: passer par une favicon.ico et url-loader? + build time
     new HtmlWebpackPlugin({
-      template: 'index.html'
+      template: 'html-loader!./src/index.html',
+      favicon: 'images/favicon.png'
     }),
     new webpack.ProvidePlugin({
       $: 'jquery',
