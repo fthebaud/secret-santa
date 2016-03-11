@@ -106,6 +106,7 @@ module.exports = {
     "contentBase": "build",
     "inline": true //automatically reload page
   }
-
-  // TODO: watch files, minify. -p -d ? check grunt see if I missed something !
-};
+  // TODO: tester hot reload. voir si on a bien des source-map pour le css?
+  // TODO: minify css and js and see if sourcemap still ok
+  // TODO: build -d dev --debug --devtool source-map --output-pathinfo !== build -p prod --optimize-minimize --optimize-occurence-order ( UglifyJsPlugin)
+  // TODO: build + watch
