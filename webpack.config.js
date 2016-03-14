@@ -96,6 +96,9 @@ module.exports = {
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: "jquery"
+    }),
+    //this plugin will minify our scripts and our css (because we use the css loader)
+    new webpack.optimize.UglifyJsPlugin({
     })
   ],
 
@@ -107,7 +110,5 @@ module.exports = {
     "inline": true //automatically reload page
   }
 };
-// TODO: tester les source-map en dehors du dev server
-// TODO: minify css and js and see if sourcemaps still ok
 // TODO: build -d dev --debug --devtool source-map --output-pathinfo !== build -p prod --optimize-minimize --optimize-occurence-order ( UglifyJsPlugin)
 // TODO: corriger l'appli : faire une fonction "addEvent"
