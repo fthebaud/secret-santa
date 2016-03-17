@@ -10,14 +10,16 @@ npm install
 
 ### Commands:
 
-- **Build** application for development:
+- **Build** application for **development**
 ```sh
 npm run webpack
+#or
+npm run webpack:dev
 ```
 
-- **Build** application for development and **watch** source folder for changes (please prefer the dev server option below):
+- **Build** application for **production**
 ```sh
-npm run webpack:watch
+npm run webpack:prod
 ```
 
 - **Build** application for development and **launch development server**:
@@ -26,7 +28,7 @@ npm run webpack-dev-server
 #development server is live at http://localhost:9090
 ```
 
-- **Build** application for production:
+- **Build** application for development and **watch** source folder for changes (sourcemaps won't work. Please prefer the dev server option):
 ```sh
-#TODO
+npm run webpack:watch
 ```
