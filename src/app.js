@@ -5,12 +5,15 @@ console.log('start app');
 // css
 require('css/style-main');
 // js
-module.exports = require('js/secret-santa-gui');
+var secretsantalib = require('js/secret-santa-lib');
 
-//initialisation
-$(document).ready(function() {
-  secretsanta.wireGui();
-});
+var initialize = function() {
+  console.log('todo');
+  console.dir(secretsantalib);
+};
 
+module.exports = {
+  initialize: initialize
+};
 
 console.log('end app');
