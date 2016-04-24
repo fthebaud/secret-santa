@@ -1,3 +1,16 @@
 {
-  "esversion": 6
-}
+   "esversion": 6,
+   "browser" : true,
+
+   "curly" : true,
+   "eqeqeq" : true,
+   "latedef": true,
+   "maxcomplexity": 10,
+   "maxdepth": 3,
+   "maxparams": 7,
+   "nonew": true,
+   "undef": true,
+   "unused": true,
+
+   "devel": true
+ }
