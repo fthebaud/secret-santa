@@ -28,7 +28,7 @@ npm run webpack-dev-server
 #development server is live at http://localhost:9090
 ```
 
-- **Build** application for development and **watch** source folder for changes (sourcemaps won't work. Please prefer the dev server option):
+- **Build** application for development and **watch** source folder for changes (source maps won't work. Please prefer the dev server option):
 ```sh
 npm run webpack:watch
 ```

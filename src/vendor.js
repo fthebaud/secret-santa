@@ -1,4 +1,5 @@
 console.log('start vendor');
+
 /**vendor dependencies**/
 // js
 require('jquery');
